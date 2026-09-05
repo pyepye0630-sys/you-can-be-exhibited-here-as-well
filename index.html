@@ -32,7 +32,7 @@
             padding: 15px;
             width: 100%;
             max-width: 960px;
-            background: rgba(0, 0, 0, 0.65);
+            background: rgba(0, 0, 0, 0.75);
             border-radius: 8px;
             box-shadow: 0 4px 20px rgba(0,0,0,0.8);
             box-sizing: border-box;
@@ -85,7 +85,7 @@
         .content-area {
             width: 100%;
             max-width: 960px;
-            min-height: 520px;
+            min-height: 550px;
             border-radius: 12px;
             padding: 25px;
             box-sizing: border-box;
@@ -93,18 +93,18 @@
             border: 2px solid var(--border-color);
         }
 
-        /* 1. 박물관 배경 (첨부 8시 25분 사진) */
+        /* 1. 박물관 배경 (첨부한 8:25 명화 사진) */
         #museum-view {
-            background: linear-gradient(rgba(18, 14, 12, 0.55), rgba(18, 14, 12, 0.7)),
-                        url('https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=1200&q=80');
+            background: linear-gradient(rgba(18, 14, 12, 0.5), rgba(18, 14, 12, 0.7)),
+                        url('https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/Ceiling_of_the_Palais_Garnier_by_Jules-Eug%C3%A8ne_Lenepveu.jpg/800px-Ceiling_of_the_Palais_Garnier_by_Jules-Eug%C3%A8ne_Lenepveu.jpg');
             background-size: cover;
             background-position: center;
         }
 
-        /* 2. 개인 사무실 배경 (첨부 8시 26분 사진) */
+        /* 2. 개인 사무실 배경 (첨부한 8:26 지구본 서재 사진) */
         #office-view {
-            background: linear-gradient(rgba(10, 8, 12, 0.65), rgba(10, 8, 12, 0.8)),
-                        url('https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=1200&q=80');
+            background: linear-gradient(rgba(10, 8, 12, 0.6), rgba(10, 8, 12, 0.8)),
+                        url('https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Old_book_bindings.jpg/800px-Old_book_bindings.jpg');
             background-size: cover;
             background-position: center;
         }
@@ -113,6 +113,9 @@
             border-bottom: 1px solid var(--accent-gold);
             padding-bottom: 8px;
             margin-bottom: 25px;
+            background: rgba(0,0,0,0.6);
+            padding: 10px 15px;
+            border-radius: 6px;
         }
 
         .section-header h3 {
@@ -130,16 +133,15 @@
 
         /* 박물관 유리 진열대 프레임 */
         .museum-stand {
-            background: linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.02) 100%);
-            border: 2px solid rgba(212, 163, 89, 0.7);
+            background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.02) 100%);
+            border: 2px solid rgba(212, 163, 89, 0.8);
             border-radius: 8px;
             padding: 15px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.8), inset 0 0 15px rgba(255,255,255,0.05);
-            backdrop-filter: blur(4px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.8);
+            backdrop-filter: blur(5px);
             display: flex;
             flex-direction: column;
             align-items: center;
-            position: relative;
             transition: transform 0.3s;
         }
 
@@ -150,7 +152,7 @@
 
         /* 사무실 액자 프레임 */
         .office-frame {
-            background: rgba(26, 20, 18, 0.9);
+            background: rgba(26, 20, 18, 0.95);
             border: 8px solid #5c3a21;
             outline: 2px solid #2e1c0f;
             border-radius: 4px;
@@ -159,16 +161,15 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            position: relative;
         }
 
         .stand-img {
             width: 100%;
-            height: 160px;
-            object-fit: cover;
+            height: 170px;
+            object-fit: contain;
+            background-color: rgba(0, 0, 0, 0.5);
             border-radius: 4px;
-            border: 1px solid rgba(0,0,0,0.8);
-            box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+            border: 1px solid rgba(212, 163, 89, 0.4);
         }
 
         .stand-caption {
@@ -180,12 +181,12 @@
         .stand-title {
             color: var(--accent-gold);
             font-weight: bold;
-            font-size: 1rem;
+            font-size: 1.05rem;
             margin-bottom: 4px;
         }
 
         .stand-subtitle {
-            font-size: 0.75rem;
+            font-size: 0.8rem;
             color: #a8998c;
         }
 
@@ -193,7 +194,7 @@
             background: #2b2017;
             border: 1px solid var(--accent-gold);
             padding: 4px 8px;
-            font-size: 0.7rem;
+            font-size: 0.75rem;
             color: #d9c2a7;
             margin-top: 8px;
             border-radius: 2px;
@@ -222,7 +223,6 @@
             overflow-y: auto;
             padding: 25px;
             box-shadow: 0 15px 40px rgba(0,0,0,0.95);
-            position: relative;
         }
 
         .pop-date-badge {
@@ -247,24 +247,25 @@
             font-style: italic;
             text-align: center;
             margin-bottom: 15px;
-            padding: 8px;
-            background: rgba(0,0,0,0.4);
+            padding: 10px;
+            background: rgba(0,0,0,0.5);
             border-radius: 6px;
         }
 
         .creature-img {
             width: 100%;
-            height: 220px;
-            object-fit: cover;
+            height: 230px;
+            object-fit: contain;
+            background-color: #0b0908;
             border-radius: 8px;
-            border: 1px solid var(--border-color);
+            border: 1px solid var(--accent-gold);
             margin-bottom: 15px;
         }
 
         .creature-info {
             font-size: 0.88rem;
             line-height: 1.6;
-            background: rgba(0, 0, 0, 0.4);
+            background: rgba(0, 0, 0, 0.5);
             padding: 15px;
             border-radius: 8px;
             border: 1px solid rgba(212, 163, 89, 0.2);
@@ -316,7 +317,7 @@
     <header>
         <h1>You can be exhibited here as well</h1>
         <div class="audio-player">
-            🎵 박물관 관람 BGM 설정: 
+            🎵 관람 BGM 설정: 
             <input type="file" id="audio-file" accept="audio/*">
             <audio id="bgm" loop></audio>
         </div>
@@ -324,7 +325,7 @@
 
     <div class="nav-tabs">
         <button class="tab-btn active" onclick="switchTab('museum')">🏛️ 박물관 전시관</button>
-        <button class="tab-btn" onclick="switchTab('office')">🔒 비밀 개인 사무실</button>
+        <button class="tab-btn" onclick="switchTab('office')">🔒 개인 사무실</button>
     </div>
 
     <div id="museum-view" class="content-area">
@@ -336,7 +337,7 @@
 
     <div id="office-view" class="content-area hidden">
         <div class="section-header">
-            <h3>🔒 관장 전용 비밀 사무실</h3>
+            <h3>🔒 개인 사무실</h3>
         </div>
         <div id="office-grid" class="grid-container"></div>
     </div>
@@ -347,13 +348,13 @@
             <div id="pop-date" class="pop-date-badge">[ TODAY ]</div>
             <h2 id="pop-header" class="popup-title">알림</h2>
             <div id="pop-quote" class="creature-quote">"대사"</div>
-            <img id="pop-img" class="creature-img" src="" alt="생물 사진">
+            <img id="pop-img" class="creature-img" src="" alt="생물 사진/일러스트">
             
             <div id="pop-info" class="creature-info"></div>
 
             <div class="choices">
                 <button class="choice-btn" onclick="makeChoice('museum')">🏛️ 1. 박물관 중앙 전시관에 정식 전시한다</button>
-                <button class="choice-btn" onclick="makeChoice('office')">🔒 2. 개인 사무실 캐비닛에 몰래 소장한다</button>
+                <button class="choice-btn" onclick="makeChoice('office')">🔒 2. 개인 사무실에 몰래 소장한다</button>
                 <button class="choice-btn" onclick="makeChoice('return')">📦 3. 인근 다른 연구 기관으로 반송한다</button>
             </div>
         </div>
@@ -369,7 +370,7 @@
             '또 하나의 기억이 도착했습니다'
         ];
 
-        // 이미지 경로를 모두 고화질 안정 경로로 교체 (도도새 포함)
+        // 🔥 정확한 생물별 실제 일러스트 & 이미지 연결
         const creatureDB = [
             {
                 id: 'dodo',
@@ -380,8 +381,8 @@
                 size: '키 약 1m / 체중 약 10~17kg',
                 trait: '모리셔스 섬에 고립되어 살면서 천적이 없어 비행 능력을 잃어버린 거대한 비둘기과의 새입니다.',
                 detail: '사람을 전혀 경계하지 않고 호기심이 많아 다가왔기 때문에 선원들에게 쉽게 포획되었습니다.',
-                reason: '모리셔스 섬에 들어온 인간의 무분별한 포획과 인간이 가져온 외래종(돼지, 쥐, 개)이 알을 먹어 치워 멸종했습니다.',
-                img: 'https://images.unsplash.com/photo-1552728089-57bdde30beb3?auto=format&fit=crop&w=800&q=80'
+                reason: '모리셔스 섬에 들어온 인간의 무분별한 포획과 외래종(돼지, 쥐, 개)의 알 포식으로 멸종했습니다.',
+                img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Dodo_1682.jpg/600px-Dodo_1682.jpg'
             },
             {
                 id: 'cooksonia',
@@ -391,9 +392,9 @@
                 era: '고생대 실루리아기~데본기 초 (약 4억 2천만 년 전)',
                 size: '높이 약 3cm ~ 6cm',
                 trait: '지구 역사상 최초로 육상에 적응한 관다발 식물 중 하나입니다. 줄기 끝 포자낭으로 번식했습니다.',
-                detail: '바다 속에서만 생명이 존재하던 지구에 대변혁을 일으킨 선구자적 생물입니다.',
+                detail: '바다 속에서만 생명이 존재하던 지구에 대변혁을 일으킨 선구자적 육상 식물입니다.',
                 reason: '기후 변화와 더 크게 진화한 후속 육상 식물들과의 빛/영양분 경쟁에서 밀려나 멸종했습니다.',
-                img: 'https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?auto=format&fit=crop&w=800&q=80'
+                img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Cooksonia_pertoni.jpg/500px-Cooksonia_pertoni.jpg'
             },
             {
                 id: 'trilobite',
@@ -401,11 +402,11 @@
                 name: '삼엽충 (Trilobite)',
                 quote: '"바다 밑바닥이 그립기도 합니다만, 이 진열장도 꽤 안락하군요."',
                 era: '고생대 캄브리아기 ~ 페름기 말 (약 5억 2천만 년 전~2억 5천만 년 전)',
-                size: '길이 1cm ~ 70cm (종에 따라 다양)',
+                size: '길이 1cm ~ 70cm',
                 trait: '몸이 세 개의 세로 축으로 나뉘어 삼엽충이라 불립니다. 탄산칼슘 외골격을 지녔습니다.',
                 detail: '약 3억 년 동안 지구 바다를 지배했으며 2만 종이 넘는 다양한 형태가 존재했습니다.',
-                reason: '페름기 말, 해수온 상승과 산소 부족을 초래한 지구 역사상 최대 규모의 대멸종(P-T 대멸종)으로 전멸했습니다.',
-                img: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=800&q=80'
+                reason: '페름기 말, 해수온 상승과 산소 부족을 초래한 지구 역사상 최대 규모의 대멸종으로 전멸했습니다.',
+                img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Kainops_invisa_rotunda.jpg/600px-Kainops_invisa_rotunda.jpg'
             },
             {
                 id: 'tyrannosaurus',
@@ -417,7 +418,7 @@
                 trait: '압도적인 크기의 두개골과 바나나 크기만 한 톱날 이빨을 가진 최상위 포식자입니다.',
                 detail: '뛰어난 시력, 입체 음향 청력, 강력한 후각을 모두 갖춘 완벽한 포식 공룡이었습니다.',
                 reason: '멕시코 유카탄 반도에 떨어진 거대 소행성 충돌(K-Pg 대멸종)로 인한 생태계 붕괴로 멸종했습니다.',
-                img: 'https://images.unsplash.com/photo-1517999186809-305612b3d3b6?auto=format&fit=crop&w=800&q=80'
+                img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/Tyrannosaurus_BW.pt.jpg/600px-Tyrannosaurus_BW.pt.jpg'
             },
             {
                 id: 'mamooth',
@@ -429,16 +430,15 @@
                 trait: '혹한을 견디기 위한 빽빽한 털과 두꺼운 지방층, 길게 휜 엄니(Tusk)를 가졌습니다.',
                 detail: '거대한 엄니는 눈을 치워 풀을 찾아내거나 포식자를 위협하는 용도로 쓰였습니다.',
                 reason: '빙하기 종료 후 툰드라 초원 감소 및 인류의 과도한 사냥이 복합 작용하여 멸종했습니다.',
-                img: 'https://images.unsplash.com/photo-1557050543-4d5f4e07ef46?auto=format&fit=crop&w=800&q=80'
+                img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Mammuthus_primigenius_3D.jpg/600px-Mammuthus_primigenius_3D.jpg'
             }
         ];
 
         const choiceResponses = {
-            office: ['대범하군요.', '이건 범죄 아닌가요?', '사무실 비밀 서랍 속에 역사 하나를 은닉했습니다.'],
-            return: ['그게 쉽나요?', '행운이군요.', '누군가는 이 결정을 깊이 아쉬워할 것입니다.']
+            office: ['대범하군요.', '이건 비밀입니다.', '개인 사무실 서랍 속에 역사 하나를 은밀히 담았습니다.'],
+            return: ['그게 최선일지도 모릅니다.', '행운을 빕니다.', '누군가는 이 결정을 깊이 아쉬워할 것입니다.']
         };
 
-        // ⚠️ [점검 전용 모드] - 정보 저장 없이 매번 무한 팝업 테스트 가능
         let currentCreature = null;
         let museumList = [];
         let officeList = [];
@@ -449,7 +449,6 @@
             renderOffice();
         };
 
-        // 새로고침할 때마다 무작위 생물 무조건 등장
         function triggerTestVisit() {
             const randomIndex = Math.floor(Math.random() * creatureDB.length);
             currentCreature = creatureDB[randomIndex];
@@ -466,11 +465,11 @@
             document.getElementById('pop-img').src = creature.img;
             
             document.getElementById('pop-info').innerHTML = `
-                <div class="info-row"><span class="info-label">🏷️ 학명/명칭:</span> ${creature.name} (${creature.type})</div>
+                <div class="info-row"><span class="info-label">🏷️ 명칭:</span> ${creature.name} (${creature.type})</div>
                 <div class="info-row"><span class="info-label">⏳ 생존 연대:</span> ${creature.era}</div>
                 <div class="info-row"><span class="info-label">📏 신체 규모:</span> ${creature.size}</div>
-                <div class="info-row"><span class="info-label">🧬 생물학적 특징:</span> ${creature.trait}</div>
-                <div class="info-row"><span class="info-label">📖 고생물학적 가치:</span> ${creature.detail}</div>
+                <div class="info-row"><span class="info-label">🧬 주요 특징:</span> ${creature.trait}</div>
+                <div class="info-row"><span class="info-label">📖 상세 정보:</span> ${creature.detail}</div>
                 <div class="info-row" style="margin-bottom:0;"><span class="info-label" style="color:#e28181;">☠️ 멸종 원인:</span> ${creature.reason}</div>
             `;
 
@@ -484,10 +483,10 @@
             } else if (action === 'office') {
                 officeList.push(currentCreature);
                 const msg = choiceResponses.office[Math.floor(Math.random() * choiceResponses.office.length)];
-                alert(`"${msg}"\n\n[${currentCreature.name}]을(를) 개인 사무실에 은밀히 보관했습니다.`);
+                alert(`"${msg}"\n\n[${currentCreature.name}]을(를) 개인 사무실에 소장했습니다.`);
             } else if (action === 'return') {
                 const msg = choiceResponses.return[Math.floor(Math.random() * choiceResponses.return.length)];
-                alert(`"${msg}"\n\n[${currentCreature.name}]을(를) 다른 연구기관으로 돌려보냈습니다.`);
+                alert(`"${msg}"\n\n[${currentCreature.name}]을(를) 다른 연구기관으로 반송했습니다.`);
             }
 
             document.getElementById('daily-modal').classList.add('hidden');
@@ -537,7 +536,7 @@
             grid.innerHTML = '';
 
             if (officeList.length === 0) {
-                grid.innerHTML = '<div style="color:#8c7a6b; grid-column: 1/-1; text-align:center; padding: 40px;">사무실에 아직 개인 소장품이 없습니다.</div>';
+                grid.innerHTML = '<div style="color:#8c7a6b; grid-column: 1/-1; text-align:center; padding: 40px;">개인 사무실에 아직 수집품이 없습니다.</div>';
                 return;
             }
 
@@ -547,14 +546,13 @@
                         <img class="stand-img" src="${item.img}" alt="${item.name}">
                         <div class="stand-caption">
                             <div class="stand-title" style="color:#e28181;">${item.name}</div>
-                            <div class="stand-subtitle" style="color:#b59b9b;">🔒 비공개 개인 수집품</div>
+                            <div class="stand-subtitle" style="color:#b59b9b;">🔒 개인 소장품</div>
                         </div>
                     </div>
                 `;
             });
         }
 
-        // BGM 업로드 처리
         document.getElementById('audio-file').addEventListener('change', function(e) {
             const file = e.target.files[0];
             if (file) {
