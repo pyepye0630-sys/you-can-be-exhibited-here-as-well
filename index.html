@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>You can be exhibited here as well</title>
+    <style>
+        :root {
+            --bg-color: #1a1816;
+            --panel-bg: #2a2421;
+            --accent-color: #d4a359;
+            --text-color: #e6dfd5;
+            --border-color: #4a3e35;
+        }
+
+        body {
+            font-family: 'Georgia', '맑은 고딕', serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 10px;
+            width: 100%;
+            max-width: 900px;
+        }
+
+        h1 {
+            font-size: 2rem;
+            color: var(--accent-color);
+            letter-spacing: 2px;
+            margin: 0 0 10px 0;
+        }
+
+        .audio-player {
+            background: var(--panel-bg);
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 0.9rem;
+        }
+
+        .nav-tabs {
+            display: flex;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .tab-btn {
+            background: var(--panel-bg);
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
+            padding: 10px 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+
+        .tab-btn.active {
+            background: var(--accent-color);
+            color: #1a1816;
+            font-weight: bold;
+        }
+
+        .content-area {
+            width: 100%;
+            max-width: 900px;
+            min-height: 400px;
+        }
+
+        /* 팝업 스타일 */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal-card {
+            background: var(--panel-bg);
+            border: 2px solid var(--accent-color);
+            border-radius: 12px;
+            width: 90%;
+            max-width: 500px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+            position: relative;
+        }
+
+        .popup-title {
+            color: var(--accent-color);
+            font-size: 1.4rem;
+            margin: 0 0 5px 0;
+            text-align: center;
+        }
+
+        .creature-quote {
+            font-size: 0.95rem;
+            color: #b5a898;
+            font-style: italic;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .creature-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            margin-bottom: 15px;
+        }
+
+        .creature-info {
+            font-size: 0.85rem;
+            line-height: 1.6;
+            background: rgba(0,0,0,0.2);
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+        }
+
+        .choices {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .choice-btn {
+            background: #382f28;
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
+            padding: 12px;
+            cursor: pointer;
+            border-radius: 6px;
+            text-align: left;
+            transition: background 0.2s;
+        }
+
+        .choice-btn:hover {
+            background: var(--accent-color);
+            color: #1a1816;
+        }
+
+        /* 박물관/사무실 그리드 */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        .exhibit-slot {
+            background: var(--panel-bg);
+            border: 1px dashed var(--border-color);
+            border-radius: 8px;
+            height: 250px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .exhibit-slot.filled {
+            border: 1px solid var(--accent-color);
+            justify-content: flex-start;
+        }
+
+        .slot-img {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+
+        .hidden { display: none !important; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>You can be exhibited here as well</h1>
+        <div class="audio-player">
+            🎵 배경음악 설정: 
+            <input type="file" id="audio-file" accept="audio/*">
+            <audio id="bgm" loop></audio>
+        </div>
+    </header>
+
+    <div class="nav-tabs">
+        <button class="tab-btn active" onclick="switchTab('museum')">🏛️ 박물관 전시관</button>
+        <button class="tab-btn" onclick="switchTab('office')">🔒 개인 사무실</button>
+    </div>
+
+    <div id="museum-view" class="content-area">
+        <h3>🏛️ 공공 전시관 (시대별 배치)</h3>
+        <p style="color: #888; font-size: 0.85rem;">일련번호순으로 전시됩니다.</p>
+        <div id="museum-grid" class="grid-container"></div>
+    </div>
+
+    <div id="office-view" class="content-area hidden">
+        <h3>🔒 비밀 개인 사무실</h3>
+        <p style="color: #888; font-size: 0.85rem;">당신만이 아는 은밀한 소장품 공간입니다.</p>
+        <div id="office-grid" class="grid-container"></div>
+    </div>
+
+    <!-- 매일 일일 생물 팝업 -->
+    <div id="daily-modal" class="modal-overlay hidden">
+        <div class="modal-card">
+            <h2 id="pop-header" class="popup-title">알림</h2>
+            <div id="pop-quote" class="creature-quote">"대사"</div>
+            <img id="pop-img" class="creature-img" src="" alt="생물 사진">
+            
+            <div id="pop-info" class="creature-info">
+                <!-- 생물 정보 -->
+            </div>
+
+            <div class="choices">
+                <button class="choice-btn" onclick="makeChoice('museum')">🏛️ 1. 박물관에 전시한다</button>
+                <button class="choice-btn" onclick="makeChoice('office')">🔒 2. 개인 사무실에 몰래 소장한다</button>
+                <button class="choice-btn" onclick="makeChoice('return')">📦 3. 다른 박물관으로 반송한다</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 1. 랜덤 상단 타이틀 목록
+        const headerTitles = [
+            '환영합니다!',
+            '새로운 방문자',
+            '나를 만난 적 있나요?',
+            '멸종은 불가피합니다',
+            '잊혀진 존재가 찾아왔습니다',
+            '새로운 도달'
+        ];
+
+        // 2. 생물 데이터베이스 (사진은 Wikimedia 사용)
+        const creatureDB = [
+            {
+                id: 'mamooth',
+                name: '털매머드 (Woolly Mammoth)',
+                quote: '"이곳은... 생각보다 꽤 따뜻하네요?"',
+                era: '신생대 (플라이스토세~홀로세)',
+                height: '약 2.7m ~ 3.4m',
+                weight: '약 4~6톤',
+                trait: '두꺼운 지방층과 긴 털, 거대하게 휜 엄니',
+                reason: '빙하기 종료로 인한 기후 변화 및 인류의 과도한 사냥',
+                img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Mammoth_v2.jpg/640px-Mammoth_v2.jpg'
+            },
+            {
+                id: 'dodo',
+                name: '도도새 (Dodo)',
+                quote: '"날개가 있는데 왜 날지 못하냐고요? 굳이 날 이유가 없었거든요."',
+                era: '신생대 (홀로세, 1681년 멸종)',
+                height: '약 1m',
+                weight: '약 10~17kg',
+                trait: '모리셔스 섬에서 천적 없이 살며 날개가 퇴화함',
+                reason: '외래종(돼지, 쥐 등) 유입 및 인간의 포획',
+                img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Dodo_1.jpg/640px-Dodo_1.jpg'
+            },
+            {
+                id: 'trilobite',
+                name: '삼엽충 (Trilobite)',
+                quote: '"바다 밑바닥이 그립기도 합니다만, 진열장도 나쁘지 않군요."',
+                era: '고생대 (캄브리아기~페름기)',
+                height: '약 3cm ~ 10cm (종에 따라 다양)',
+                weight: '약 몇십 Gram ~ 1kg 미만',
+                trait: '단단한 외골격을 가졌으며 체절이 3부분으로 나뉨',
+                reason: '페름기 말 대멸종 (지구 역사상 최대 멸종 사건)',
+                img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Trilobite_Ordovician.jpg/640px-Trilobite_Ordovician.jpg'
+            },
+            {
+                id: 'smilodon',
+                name: '검치호 (Smilodon)',
+                quote: '"제 송곳니를 보셨나요? 절대로 시비 걸 생각은 마세요."',
+                era: '신생대 (플라이스토세)',
+                height: '약 1m ~ 1.2m (몸길이 2m)',
+                weight: '약 160~280kg',
+                trait: '입 밖으로 길게 자란 20cm 이상의 거대한 위턱 송곳니',
+                reason: '대형 먹잇감의 감소 및 환경 변화',
+                img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Smilodon_fatalis_Sergiodlarosa.jpg/640px-Smilodon_fatalis_Sergiodlarosa.jpg'
+            },
+            {
+                id: 'ammonite',
+                name: '암모나이트 (Ammonite)',
+                quote: '"제 껍데기의 수평선 패턴을 가만히 보고 있으면 마음이 편안해집니다."',
+                era: '중생대 (데본기~백악기 말)',
+                height: '직경 5cm ~ 2m 이상',
+                weight: '종에 따라 수백g ~ 수십kg',
+                trait: '나선형으로 감긴 단단한 평면 껍데기',
+                reason: '백악기 말 소행성 충돌로 인한 K-Pg 대멸종',
+                img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Ammonite_Fossil.jpg/640px-Ammonite_Fossil.jpg'
+            }
+        ];
+
+        // 선택지에 따른 위트 있는 시스템 멘트
+        const choiceResponses = {
+            office: ['대범하군요.', '이건 범죄 아닌가요?', '사무실 서랍 속에 멸종을 숨기셨습니다.'],
+            return: ['그게 쉽나요?', '행운이군요.', '누군가는 이 결정을 아쉬워할 것입니다.']
+        };
+
+        // 데이터 저장소 (로컬 스토리지)
+        let gameState = JSON.parse(localStorage.getItem('museum_game_state')) || {
+            lastDate: '',
+            todayCreature: null,
+            museumList: [],
+            officeList: []
+        };
+
+        // 음향 설정
+        document.getElementById('audio-file').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const audio = document.getElementById('bgm');
+                audio.src = URL.createObjectURL(file);
+                audio.play();
+            }
+        });
+
+        // 초기화
+        window.onload = function() {
+            checkDailyVisit();
+            renderMuseum();
+            renderOffice();
+        };
+
+        // 날짜 체크 및 일일 생물 등장 로직
+        function checkDailyVisit() {
+            const today = new Date().toISOString().slice(0, 10);
+
+            // 오늘 이미 방문했거나 결정을 내렸다면 팝업을 띄우지 않음
+            if (gameState.lastDate === today && !gameState.todayCreature) {
+                return;
+            }
+
+            // 새로운 날이 오면 새로운 생물 선정
+            if (gameState.lastDate !== today) {
+                const randomIndex = Math.floor(Math.random() * creatureDB.length);
+                gameState.todayCreature = creatureDB[randomIndex];
+                gameState.lastDate = today;
+                saveState();
+            }
+
+            // 오늘 아직 선택을 안 했다면 팝업 표시
+            if (gameState.todayCreature) {
+                showPopup(gameState.todayCreature);
+            }
+        }
+
+        // 팝업 띄우기
+        function showPopup(creature) {
+            const randomHeader = headerTitles[Math.floor(Math.random() * headerTitles.length)];
+            
+            document.getElementById('pop-header').innerText = randomHeader;
+            document.getElementById('pop-quote').innerText = creature.quote;
+            document.getElementById('pop-img').src = creature.img;
+            
+            document.getElementById('pop-info').innerHTML = `
+                <strong>📜 Name:</strong> ${creature.name}<br>
+                <strong>⏳ Era:</strong> ${creature.era}<br>
+                <strong>📏 Size:</strong> 키 ${creature.height} / 무게 ${creature.weight}<br>
+                <strong>💡 Trait:</strong> ${creature.trait}<br>
+                <strong>☠️ Extinction:</strong> ${creature.reason}
+            `;
+
+            document.getElementById('daily-modal').classList.remove('hidden');
+        }
+
+        // 선택 처리
+        function makeChoice(action) {
+            const creature = gameState.todayCreature;
+
+            if (action === 'museum') {
+                gameState.museumList.push(creature);
+                alert(`[${creature.name}]이(가) 박물관에 안전하게 전시되었습니다.`);
+            } else if (action === 'office') {
+                gameState.officeList.push(creature);
+                const msg = choiceResponses.office[Math.floor(Math.random() * choiceResponses.office.length)];
+                alert(`"${msg}"\n\n[${creature.name}]을(를) 개인 사무실에 은밀히 숨겼습니다.`);
+            } else if (action === 'return') {
+                const msg = choiceResponses.return[Math.floor(Math.random() * choiceResponses.return.length)];
+                alert(`"${msg}"\n\n[${creature.name}]을(를) 다른 박물관으로 돌려보냈습니다.`);
+            }
+
+            // 오늘 할 일 완료 처리
+            gameState.todayCreature = null;
+            saveState();
+
+            document.getElementById('daily-modal').classList.add('hidden');
+            renderMuseum();
+            renderOffice();
+        }
+
+        // 화면 탭 전환
+        function switchTab(tab) {
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.getElementById('museum-view').classList.add('hidden');
+            document.getElementById('office-view').classList.add('hidden');
+
+            if (tab === 'museum') {
+                document.getElementById('museum-view').classList.remove('hidden');
+                event.target.classList.add('active');
+            } else {
+                document.getElementById('office-view').classList.remove('hidden');
+                event.target.classList.add('active');
+            }
+        }
+
+        // 박물관 렌더링
+        function renderMuseum() {
+            const grid = document.getElementById('museum-grid');
+            grid.innerHTML = '';
+
+            if (gameState.museumList.length === 0) {
+                grid.innerHTML = '<div style="color:#777; grid-column: 1/-1;">아직 전시된 생물이 없습니다. 매일 찾아오는 생물을 기다려보세요.</div>';
+                return;
+            }
+
+            gameState.museumList.forEach(item => {
+                grid.innerHTML += `
+                    <div class="exhibit-slot filled">
+                        <img class="slot-img" src="${item.img}" alt="${item.name}">
+                        <strong style="color:var(--accent-color); font-size:0.9rem;">${item.name}</strong>
+                        <p style="font-size:0.75rem; color:#aaa; margin-top:5px;">${item.era}</p>
+                    </div>
+                `;
+            });
+        }
+
+        // 개인 사무실 렌더링
+        function renderOffice() {
+            const grid = document.getElementById('office-grid');
+            grid.innerHTML = '';
+
+            if (gameState.officeList.length === 0) {
+                grid.innerHTML = '<div style="color:#777; grid-column: 1/-1;">사무실은 아직 비어있습니다.</div>';
+                return;
+            }
+
+            gameState.officeList.forEach(item => {
+                grid.innerHTML += `
+                    <div class="exhibit-slot filled" style="border-color: #8c4343;">
+                        <img class="slot-img" src="${item.img}" alt="${item.name}">
+                        <strong style="color:#e28181; font-size:0.9rem;">${item.name}</strong>
+                        <p style="font-size:0.75rem; color:#aaa; margin-top:5px;">🔒 비공개 소장품</p>
+                    </div>
+                `;
+            });
+        }
+
+        // 상태 저장
+        function saveState() {
+            localStorage.setItem('museum_game_state', JSON.stringify(gameState));
+        }
+    </script>
+</body>
+</html>
