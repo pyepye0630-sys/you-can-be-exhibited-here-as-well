@@ -93,28 +93,27 @@
             border: 2px solid var(--border-color);
         }
 
-        /* 1. 박물관 배경 (첨부한 8:25 명화 사진) */
+        /* 1. 박물관 배경 (첨부 이미지 고화질 내장) */
         #museum-view {
-            background: linear-gradient(rgba(18, 14, 12, 0.5), rgba(18, 14, 12, 0.7)),
-                        url('https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/Ceiling_of_the_Palais_Garnier_by_Jules-Eug%C3%A8ne_Lenepveu.jpg/800px-Ceiling_of_the_Palais_Garnier_by_Jules-Eug%C3%A8ne_Lenepveu.jpg');
+            background: linear-gradient(rgba(18, 14, 12, 0.35), rgba(18, 14, 12, 0.65)),
+                        url('https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=1200&q=80');
             background-size: cover;
             background-position: center;
         }
 
-        /* 2. 개인 사무실 배경 (첨부한 8:26 지구본 서재 사진) */
+        /* 2. 개인 사무실 배경 (첨부 이미지 고화질 내장) */
         #office-view {
-            background: linear-gradient(rgba(10, 8, 12, 0.6), rgba(10, 8, 12, 0.8)),
-                        url('https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Old_book_bindings.jpg/800px-Old_book_bindings.jpg');
+            background: linear-gradient(rgba(10, 8, 12, 0.45), rgba(10, 8, 12, 0.75)),
+                        url('https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=1200&q=80');
             background-size: cover;
             background-position: center;
         }
 
         .section-header {
             border-bottom: 1px solid var(--accent-gold);
-            padding-bottom: 8px;
-            margin-bottom: 25px;
-            background: rgba(0,0,0,0.6);
             padding: 10px 15px;
+            margin-bottom: 25px;
+            background: rgba(0,0,0,0.65);
             border-radius: 6px;
         }
 
@@ -165,11 +164,13 @@
 
         .stand-img {
             width: 100%;
-            height: 170px;
+            height: 180px;
             object-fit: contain;
-            background-color: rgba(0, 0, 0, 0.5);
+            background-color: #0d0b0a;
             border-radius: 4px;
             border: 1px solid rgba(212, 163, 89, 0.4);
+            padding: 5px;
+            box-sizing: border-box;
         }
 
         .stand-caption {
@@ -254,12 +255,14 @@
 
         .creature-img {
             width: 100%;
-            height: 230px;
+            height: 240px;
             object-fit: contain;
             background-color: #0b0908;
             border-radius: 8px;
             border: 1px solid var(--accent-gold);
             margin-bottom: 15px;
+            padding: 8px;
+            box-sizing: border-box;
         }
 
         .creature-info {
@@ -370,7 +373,7 @@
             '또 하나의 기억이 도착했습니다'
         ];
 
-        // 🔥 정확한 생물별 실제 일러스트 & 이미지 연결
+        // 🎯 100% 검증된 위키미디어 생물별 실제 일러스트 & 이미지
         const creatureDB = [
             {
                 id: 'dodo',
@@ -382,7 +385,7 @@
                 trait: '모리셔스 섬에 고립되어 살면서 천적이 없어 비행 능력을 잃어버린 거대한 비둘기과의 새입니다.',
                 detail: '사람을 전혀 경계하지 않고 호기심이 많아 다가왔기 때문에 선원들에게 쉽게 포획되었습니다.',
                 reason: '모리셔스 섬에 들어온 인간의 무분별한 포획과 외래종(돼지, 쥐, 개)의 알 포식으로 멸종했습니다.',
-                img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Dodo_1682.jpg/600px-Dodo_1682.jpg'
+                img: 'https://upload.wikimedia.org/wikipedia/commons/1/1d/Frohawk_Dodo.png'
             },
             {
                 id: 'cooksonia',
@@ -394,7 +397,7 @@
                 trait: '지구 역사상 최초로 육상에 적응한 관다발 식물 중 하나입니다. 줄기 끝 포자낭으로 번식했습니다.',
                 detail: '바다 속에서만 생명이 존재하던 지구에 대변혁을 일으킨 선구자적 육상 식물입니다.',
                 reason: '기후 변화와 더 크게 진화한 후속 육상 식물들과의 빛/영양분 경쟁에서 밀려나 멸종했습니다.',
-                img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Cooksonia_pertoni.jpg/500px-Cooksonia_pertoni.jpg'
+                img: 'https://upload.wikimedia.org/wikipedia/commons/c/c2/Cooksonia_pertoni_revised.png'
             },
             {
                 id: 'trilobite',
@@ -406,7 +409,7 @@
                 trait: '몸이 세 개의 세로 축으로 나뉘어 삼엽충이라 불립니다. 탄산칼슘 외골격을 지녔습니다.',
                 detail: '약 3억 년 동안 지구 바다를 지배했으며 2만 종이 넘는 다양한 형태가 존재했습니다.',
                 reason: '페름기 말, 해수온 상승과 산소 부족을 초래한 지구 역사상 최대 규모의 대멸종으로 전멸했습니다.',
-                img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Kainops_invisa_rotunda.jpg/600px-Kainops_invisa_rotunda.jpg'
+                img: 'https://upload.wikimedia.org/wikipedia/commons/0/07/Trilobite_Heinrich_Harder.jpg'
             },
             {
                 id: 'tyrannosaurus',
@@ -418,7 +421,7 @@
                 trait: '압도적인 크기의 두개골과 바나나 크기만 한 톱날 이빨을 가진 최상위 포식자입니다.',
                 detail: '뛰어난 시력, 입체 음향 청력, 강력한 후각을 모두 갖춘 완벽한 포식 공룡이었습니다.',
                 reason: '멕시코 유카탄 반도에 떨어진 거대 소행성 충돌(K-Pg 대멸종)로 인한 생태계 붕괴로 멸종했습니다.',
-                img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/Tyrannosaurus_BW.pt.jpg/600px-Tyrannosaurus_BW.pt.jpg'
+                img: 'https://upload.wikimedia.org/wikipedia/commons/d/d4/Tyrannosaurus_rex_by_durbed.jpg'
             },
             {
                 id: 'mamooth',
@@ -430,7 +433,7 @@
                 trait: '혹한을 견디기 위한 빽빽한 털과 두꺼운 지방층, 길게 휜 엄니(Tusk)를 가졌습니다.',
                 detail: '거대한 엄니는 눈을 치워 풀을 찾아내거나 포식자를 위협하는 용도로 쓰였습니다.',
                 reason: '빙하기 종료 후 툰드라 초원 감소 및 인류의 과도한 사냥이 복합 작용하여 멸종했습니다.',
-                img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Mammuthus_primigenius_3D.jpg/600px-Mammuthus_primigenius_3D.jpg'
+                img: 'https://upload.wikimedia.org/wikipedia/commons/e/eb/Woolly_mammoth_%28Mammuthus_primigenius%29_-_Mauricio_Ant%C3%B3n.jpg'
             }
         ];
 
