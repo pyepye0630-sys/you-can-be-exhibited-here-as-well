@@ -6,49 +6,56 @@
     <title>You can be exhibited here as well</title>
     <style>
         :root {
-            --bg-color: #1a1816;
-            --panel-bg: #2a2421;
-            --accent-color: #d4a359;
-            --text-color: #e6dfd5;
-            --border-color: #4a3e35;
+            --bg-dark: #120e0c;
+            --accent-gold: #d4a359;
+            --accent-glow: #ffe8b3;
+            --text-color: #f0e6d2;
+            --panel-bg: rgba(28, 22, 19, 0.85);
+            --border-color: #5c4636;
         }
 
         body {
-            font-family: 'Georgia', '맑은 고딕', serif;
-            background-color: var(--bg-color);
+            font-family: 'Georgia', 'Garamond', 'Batang', serif;
+            background-color: var(--bg-dark);
             color: var(--text-color);
             margin: 0;
             padding: 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
+            min-height: 100vh;
         }
 
         header {
             text-align: center;
             margin-bottom: 20px;
-            border-bottom: 2px solid var(--accent-color);
-            padding-bottom: 10px;
+            border-bottom: 2px solid var(--accent-gold);
+            padding-bottom: 15px;
             width: 100%;
-            max-width: 900px;
+            max-width: 960px;
+            background: rgba(0,0,0,0.5);
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.8);
         }
 
         h1 {
-            font-size: 2rem;
-            color: var(--accent-color);
-            letter-spacing: 2px;
+            font-size: 2.2rem;
+            color: var(--accent-gold);
+            letter-spacing: 3px;
             margin: 0 0 10px 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.9);
         }
 
         .audio-player {
-            background: var(--panel-bg);
-            padding: 10px 20px;
-            border-radius: 8px;
-            border: 1px solid var(--border-color);
-            display: flex;
+            background: #2a1f18;
+            padding: 8px 18px;
+            border-radius: 20px;
+            border: 1px solid var(--accent-gold);
+            display: inline-flex;
             align-items: center;
-            gap: 15px;
-            font-size: 0.9rem;
+            gap: 12px;
+            font-size: 0.85rem;
         }
 
         .nav-tabs {
@@ -58,68 +65,202 @@
         }
 
         .tab-btn {
-            background: var(--panel-bg);
+            background: #2a201a;
             color: var(--text-color);
             border: 1px solid var(--border-color);
-            padding: 10px 25px;
+            padding: 12px 28px;
             cursor: pointer;
-            font-size: 1rem;
-            border-radius: 4px;
+            font-size: 1.05rem;
+            border-radius: 6px;
             transition: all 0.3s;
+            font-family: inherit;
         }
 
         .tab-btn.active {
-            background: var(--accent-color);
-            color: #1a1816;
+            background: var(--accent-gold);
+            color: #120e0c;
             font-weight: bold;
+            box-shadow: 0 0 15px rgba(212, 163, 89, 0.4);
         }
 
         .content-area {
             width: 100%;
-            max-width: 900px;
-            min-height: 400px;
+            max-width: 960px;
+            min-height: 500px;
+            border-radius: 12px;
+            padding: 25px;
+            box-sizing: border-box;
+            box-shadow: inset 0 0 50px rgba(0,0,0,0.9);
+            border: 2px solid var(--border-color);
+        }
+
+        /* 박물관 배경 */
+        #museum-view {
+            background: linear-gradient(rgba(18, 14, 12, 0.75), rgba(18, 14, 12, 0.85)),
+                        url('https://images.unsplash.com/photo-1582555172866-f73bb12a2ab3?auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* 개인 사무실 배경 */
+        #office-view {
+            background: linear-gradient(rgba(10, 8, 12, 0.85), rgba(10, 8, 12, 0.92)),
+                        url('https://images.unsplash.com/photo-1507842217343-583bb7270b66?auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .section-header {
+            border-bottom: 1px solid var(--accent-gold);
+            padding-bottom: 8px;
+            margin-bottom: 20px;
+        }
+
+        .section-header h3 {
+            margin: 0;
+            color: var(--accent-glow);
+            font-size: 1.4rem;
+        }
+
+        .section-header p {
+            margin: 5px 0 0 0;
+            color: #b3a296;
+            font-size: 0.85rem;
+        }
+
+        /* 전시 그리드 */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 25px;
+        }
+
+        /* 박물관 유리 진열대 프레임 */
+        .museum-stand {
+            background: linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.01) 100%);
+            border: 2px solid rgba(212, 163, 89, 0.6);
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.7), inset 0 0 15px rgba(255,255,255,0.05);
+            backdrop-filter: blur(3px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            transition: transform 0.3s;
+        }
+
+        .museum-stand:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-glow);
+        }
+
+        /* 사무실 액자 프레임 */
+        .office-frame {
+            background: #1a1412;
+            border: 8px solid #5c3a21;
+            outline: 2px solid #2e1c0f;
+            border-radius: 4px;
+            padding: 15px;
+            box-shadow: 5px 10px 20px rgba(0,0,0,0.9);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
+
+        .stand-img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 4px;
+            border: 1px solid rgba(0,0,0,0.8);
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+        }
+
+        .stand-caption {
+            margin-top: 12px;
+            text-align: center;
+            width: 100%;
+        }
+
+        .stand-title {
+            color: var(--accent-gold);
+            font-weight: bold;
+            font-size: 1rem;
+            margin-bottom: 4px;
+        }
+
+        .stand-subtitle {
+            font-size: 0.75rem;
+            color: #a8998c;
+        }
+
+        .plaque {
+            background: #2b2017;
+            border: 1px solid var(--accent-gold);
+            padding: 4px 8px;
+            font-size: 0.7rem;
+            color: #d9c2a7;
+            margin-top: 8px;
+            border-radius: 2px;
+            display: inline-block;
         }
 
         /* 팝업 스타일 */
         .modal-overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.85);
+            background: rgba(0, 0, 0, 0.88);
             display: flex;
             justify-content: center;
             align-items: center;
             z-index: 1000;
+            backdrop-filter: blur(5px);
         }
 
         .modal-card {
-            background: var(--panel-bg);
-            border: 2px solid var(--accent-color);
+            background: #1e1815;
+            border: 2px solid var(--accent-gold);
             border-radius: 12px;
-            width: 90%;
-            max-width: 500px;
+            width: 92%;
+            max-width: 580px;
+            max-height: 90vh;
+            overflow-y: auto;
             padding: 25px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.95);
             position: relative;
         }
 
+        .pop-date-badge {
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--accent-gold);
+            letter-spacing: 2px;
+            margin-bottom: 5px;
+        }
+
         .popup-title {
-            color: var(--accent-color);
-            font-size: 1.4rem;
+            color: var(--accent-glow);
+            font-size: 1.5rem;
             margin: 0 0 5px 0;
             text-align: center;
         }
 
         .creature-quote {
             font-size: 0.95rem;
-            color: #b5a898;
+            color: #d1c0aa;
             font-style: italic;
             text-align: center;
             margin-bottom: 15px;
+            padding: 8px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 6px;
         }
 
         .creature-img {
             width: 100%;
-            height: 200px;
+            height: 220px;
             object-fit: cover;
             border-radius: 8px;
             border: 1px solid var(--border-color);
@@ -127,12 +268,22 @@
         }
 
         .creature-info {
-            font-size: 0.85rem;
+            font-size: 0.88rem;
             line-height: 1.6;
-            background: rgba(0,0,0,0.2);
-            padding: 12px;
-            border-radius: 6px;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid rgba(212, 163, 89, 0.2);
             margin-bottom: 20px;
+        }
+
+        .info-row {
+            margin-bottom: 8px;
+        }
+
+        .info-label {
+            color: var(--accent-gold);
+            font-weight: bold;
         }
 
         .choices {
@@ -142,55 +293,29 @@
         }
 
         .choice-btn {
-            background: #382f28;
+            background: #2a201a;
             color: var(--text-color);
             border: 1px solid var(--border-color);
-            padding: 12px;
+            padding: 12px 15px;
             cursor: pointer;
             border-radius: 6px;
             text-align: left;
-            transition: background 0.2s;
+            font-family: inherit;
+            font-size: 0.9rem;
+            transition: all 0.2s;
         }
 
         .choice-btn:hover {
-            background: var(--accent-color);
-            color: #1a1816;
-        }
-
-        /* 박물관/사무실 그리드 */
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-            gap: 20px;
-        }
-
-        .exhibit-slot {
-            background: var(--panel-bg);
-            border: 1px dashed var(--border-color);
-            border-radius: 8px;
-            height: 250px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 10px;
-            text-align: center;
-        }
-
-        .exhibit-slot.filled {
-            border: 1px solid var(--accent-color);
-            justify-content: flex-start;
-        }
-
-        .slot-img {
-            width: 100%;
-            height: 120px;
-            object-fit: cover;
-            border-radius: 4px;
-            margin-bottom: 10px;
+            background: var(--accent-gold);
+            color: #120e0c;
+            font-weight: bold;
         }
 
         .hidden { display: none !important; }
+
+        /* 스크롤바 디자인 */
+        .modal-card::-webkit-scrollbar { width: 6px; }
+        .modal-card::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 3px; }
     </style>
 </head>
 <body>
@@ -198,7 +323,7 @@
     <header>
         <h1>You can be exhibited here as well</h1>
         <div class="audio-player">
-            🎵 배경음악 설정: 
+            🎵 박물관 관람 BGM 설정: 
             <input type="file" id="audio-file" accept="audio/*">
             <audio id="bgm" loop></audio>
         </div>
@@ -206,117 +331,151 @@
 
     <div class="nav-tabs">
         <button class="tab-btn active" onclick="switchTab('museum')">🏛️ 박물관 전시관</button>
-        <button class="tab-btn" onclick="switchTab('office')">🔒 개인 사무실</button>
+        <button class="tab-btn" onclick="switchTab('office')">🔒 비밀 개인 사무실</button>
     </div>
 
     <div id="museum-view" class="content-area">
-        <h3>🏛️ 공공 전시관 (시대별 배치)</h3>
-        <p style="color: #888; font-size: 0.85rem;">일련번호순으로 전시됩니다.</p>
+        <div class="section-header">
+            <h3>🏛️ 중앙 고생물 전시관</h3>
+            <p>시대를 뛰어넘어 보존된 기이하고 아름다운 멸종 생물들의 공간입니다.</p>
+        </div>
         <div id="museum-grid" class="grid-container"></div>
     </div>
 
     <div id="office-view" class="content-area hidden">
-        <h3>🔒 비밀 개인 사무실</h3>
-        <p style="color: #888; font-size: 0.85rem;">당신만이 아는 은밀한 소장품 공간입니다.</p>
+        <div class="section-header">
+            <h3>🔒 관장 전용 비밀 사무실</h3>
+            <p>어질러진 서류와 먼지 쌓인 진열대 사이, 오직 당신만의 은밀한 수집품들입니다.</p>
+        </div>
         <div id="office-grid" class="grid-container"></div>
     </div>
 
     <!-- 매일 일일 생물 팝업 -->
     <div id="daily-modal" class="modal-overlay hidden">
         <div class="modal-card">
+            <div id="pop-date" class="pop-date-badge">[ TODAY ]</div>
             <h2 id="pop-header" class="popup-title">알림</h2>
             <div id="pop-quote" class="creature-quote">"대사"</div>
             <img id="pop-img" class="creature-img" src="" alt="생물 사진">
             
             <div id="pop-info" class="creature-info">
-                <!-- 생물 정보 -->
+                <!-- 상세 정보 -->
             </div>
 
             <div class="choices">
-                <button class="choice-btn" onclick="makeChoice('museum')">🏛️ 1. 박물관에 전시한다</button>
-                <button class="choice-btn" onclick="makeChoice('office')">🔒 2. 개인 사무실에 몰래 소장한다</button>
-                <button class="choice-btn" onclick="makeChoice('return')">📦 3. 다른 박물관으로 반송한다</button>
+                <button class="choice-btn" onclick="makeChoice('museum')">🏛️ 1. 박물관 중앙 전시관에 정식 전시한다</button>
+                <button class="choice-btn" onclick="makeChoice('office')">🔒 2. 개인 사무실 캐비닛에 몰래 소장한다</button>
+                <button class="choice-btn" onclick="makeChoice('return')">📦 3. 인근 다른 연구 기관으로 반송한다</button>
             </div>
         </div>
     </div>
 
     <script>
-        // 1. 랜덤 상단 타이틀 목록
+        // 상단 랜덤 타이틀
         const headerTitles = [
             '환영합니다!',
             '새로운 방문자',
             '나를 만난 적 있나요?',
             '멸종은 불가피합니다',
-            '잊혀진 존재가 찾아왔습니다',
-            '새로운 도달'
+            '잊혀진 존재가 문을 두드립니다',
+            '또 하나의 기억이 도착했습니다'
         ];
 
-        // 2. 생물 데이터베이스 (사진은 Wikimedia 사용)
+        // 다양한 식물, 공룡, 조류, 포유류, 어류, 절지동물 등 풍부한 생물 데이터베이스
         const creatureDB = [
             {
+                id: 'cooksonia',
+                type: '🌱 고생대 식물',
+                name: '쿡소니아 (Cooksonia)',
+                quote: '"물 밖으로 나가는 첫 걸음은 원래 가장 두려운 법이죠."',
+                era: '고생대 실루리아기~데본기 초 (약 4억 2천만 년 전)',
+                size: '높이 약 3cm ~ 6cm',
+                trait: '지구 역사상 최초로 육상에 적응한 관다발 식물 중 하나입니다. 잎과 뿌리가 따로 없었으며, 줄기 끝에 포자낭을 형성하여 번식했습니다.',
+                detail: '바다 속에서만 생명이 존재하던 지구에 대변혁을 일으킨 선구자입니다. 줄기 내부에 물과 영양분을 운반하는 관(관다발)을 만들어 육지의 건조한 환경을 극복했습니다.',
+                reason: '기후 변화와 더 크게 진화한 후속 육상 식물들과의 빛/영양분 경쟁에서 밀려나 멸종했습니다.',
+                img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Cooksonia_pertoni.jpg/640px-Cooksonia_pertoni.jpg'
+            },
+            {
+                id: 'trilobite',
+                type: '🦐 고생대 절지동물',
+                name: '삼엽충 (Trilobite)',
+                quote: '"바다 밑바닥이 그립기도 합니다만, 이 진열장도 꽤 안락하군요."',
+                era: '고생대 캄브리아기 ~ 페름기 말 (약 5억 2천만 년 전~2억 5천만 년 전)',
+                size: '길이 1cm ~ 70cm (종에 따라 다양)',
+                trait: '몸이 세 개의 세로 축(왼쪽, 중앙, 오른쪽)으로 나뉘어 삼엽충이라 불립니다. 단단한 탄산칼슘 외골격을 지녔습니다.',
+                detail: '약 3억 년 동안 지구의 바다를 지배했던 생물로, 2만 종이 넘는 다양한 형태로 진화했습니다. 최초로 방칼사이트 결정 형태의 복합 눈을 가진 생물 중 하나이기도 합니다.',
+                reason: '페름기 말, 해수온 상승과 산소 부족을 초래한 지구 역사상 최대 규모의 대멸종 사건(P-T 대멸종)으로 전멸했습니다.',
+                img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Trilobite_Ordovician.jpg/640px-Trilobite_Ordovician.jpg'
+            },
+            {
+                id: 'tyrannosaurus',
+                type: '🦖 중생대 파충류 (공룡)',
+                name: '티라노사우루스 렉스 (T. rex)',
+                quote: '"앞다리가 짧다고 놀리지 마세요. 악력은 6톤이 넘으니까요."',
+                era: '중생대 백악기 후기 (약 6,800만 년 전~6,600만 년 전)',
+                size: '몸길이 약 12m ~ 13m / 체중 약 6~9톤',
+                trait: '압도적인 크기의 두개골과 바나나 크기만 한 톱날 모양의 이빨을 가진 극강의 수인목 공룡입니다.',
+                detail: '뛰어난 시력과 입체 시야, 입체 음향을 들을 수 있는 청력, 강력한 후각을 모두 갖춘 완벽한 포식자였습니다. 짧은 앞다리는 사냥감을 고정하거나 일어날 때 보조 역할을 했던 것으로 추정됩니다.',
+                reason: '멕시코 유카탄 반도에 떨어진 거대 소행성 충돌(K-Pg 대멸종)로 인한 생태계 붕괴로 멸종했습니다.',
+                img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/Tyrannosaurus_Rex_Holotype.jpg/640px-Tyrannosaurus_Rex_Holotype.jpg'
+            },
+            {
+                id: 'archaeopteryx',
+                type: '🦅 중생대 조류/공룡',
+                name: '시조새 (Archaeopteryx)',
+                quote: '"깃털은 날기 위한 것일까요, 체온을 유지하기 위한 것일까요?"',
+                era: '중생대 쥐라기 후기 (약 1억 5천만 년 전)',
+                size: '몸길이 약 50cm (비둘기~까마귀 크기)',
+                trait: '공룡의 특징(이빨, 긴 뼈 꼬리, 날개 끝 갈고리 깃발)과 조류의 특징(깃털, 날개)을 동시에 지닌 파충류-조류 이행기 화석입니다.',
+                detail: '깃털 구조는 현대의 새와 유사하여 활강이나 단거리 비행이 가능했을 것으로 보입니다. 공룡이 어떻게 스스로를 새 형태로 진화시켜 나갔는지 보여주는 결정적 증거입니다.',
+                reason: '기후 변화 및 더 효율적인 비행 능력을 갖춘 초기 조류 및 소형 수각류와의 경쟁 과정에서 사라졌습니다.',
+                img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/Archaeopteryx_lithographica_%28Berlin_specimen%29.jpg/640px-Archaeopteryx_lithographica_%28Berlin_specimen%29.jpg'
+            },
+            {
                 id: 'mamooth',
+                type: '🐘 신생대 포유류',
                 name: '털매머드 (Woolly Mammoth)',
                 quote: '"이곳은... 생각보다 꽤 따뜻하네요?"',
-                era: '신생대 (플라이스토세~홀로세)',
-                height: '약 2.7m ~ 3.4m',
-                weight: '약 4~6톤',
-                trait: '두꺼운 지방층과 긴 털, 거대하게 휜 엄니',
-                reason: '빙하기 종료로 인한 기후 변화 및 인류의 과도한 사냥',
+                era: '신생대 플라이스토세~홀로세 (약 40만 년 전~4,000년 전)',
+                size: '어깨 높이 약 2.7m ~ 3.4m / 체중 약 4~6톤',
+                trait: '빙하기의 혹한을 견디기 위해 길고 빽빽한 털과 두꺼운 지방층, 길게 휜 엄니(Tusk)를 가졌습니다.',
+                detail: '거대한 엄니는 눈을 치워 밑에 깔린 풀을 찾아내거나 포식자를 위협하는 용도로 쓰였습니다. 이집트 피라미드가 건설될 당시까지도 북극 랭겔 섬에 소수 개체군이 살아남아 있었습니다.',
+                reason: '빙하기가 끝나며 툰드라 초원이 감소한 기후 변화와 인류의 집요한 사냥이 복합적으로 작용했습니다.',
                 img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Mammoth_v2.jpg/640px-Mammoth_v2.jpg'
             },
             {
                 id: 'dodo',
                 name: '도도새 (Dodo)',
-                quote: '"날개가 있는데 왜 날지 못하냐고요? 굳이 날 이유가 없었거든요."',
-                era: '신생대 (홀로세, 1681년 멸종)',
-                height: '약 1m',
-                weight: '약 10~17kg',
-                trait: '모리셔스 섬에서 천적 없이 살며 날개가 퇴화함',
-                reason: '외래종(돼지, 쥐 등) 유입 및 인간의 포획',
+                type: '🐦 신생대 조류',
+                quote: '"날개가 있는데 왜 날지 못하냐고요? 천적이 없는 낙원에서는 날 필요가 없었거든요."',
+                era: '신생대 홀로세 (1681년경 인간에 의해 멸종)',
+                size: '키 약 1m / 체중 약 10~17kg',
+                trait: '모리셔스 섬에 고립되어 살면서 천적이 없어 비행 능력을 잃어버린 거대한 비둘기과의 새입니다.',
+                detail: '사람을 전혀 경계하지 않고 호기심이 많아 다가왔기 때문에 선원들에게 쉽게 포획되었습니다. 인간 활동에 의한 생물 멸종의 가장 대표적인 상징입니다.',
+                reason: '모리셔스 섬에 들어온 인간의 무분별한 포획과 인간이 가져온 외래종(돼지, 쥐, 개)이 알을 먹어 치워 멸종했습니다.',
                 img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Dodo_1.jpg/640px-Dodo_1.jpg'
             },
             {
-                id: 'trilobite',
-                name: '삼엽충 (Trilobite)',
-                quote: '"바다 밑바닥이 그립기도 합니다만, 진열장도 나쁘지 않군요."',
-                era: '고생대 (캄브리아기~페름기)',
-                height: '약 3cm ~ 10cm (종에 따라 다양)',
-                weight: '약 몇십 Gram ~ 1kg 미만',
-                trait: '단단한 외골격을 가졌으며 체절이 3부분으로 나뉨',
-                reason: '페름기 말 대멸종 (지구 역사상 최대 멸종 사건)',
-                img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Trilobite_Ordovician.jpg/640px-Trilobite_Ordovician.jpg'
-            },
-            {
-                id: 'smilodon',
-                name: '검치호 (Smilodon)',
-                quote: '"제 송곳니를 보셨나요? 절대로 시비 걸 생각은 마세요."',
-                era: '신생대 (플라이스토세)',
-                height: '약 1m ~ 1.2m (몸길이 2m)',
-                weight: '약 160~280kg',
-                trait: '입 밖으로 길게 자란 20cm 이상의 거대한 위턱 송곳니',
-                reason: '대형 먹잇감의 감소 및 환경 변화',
-                img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Smilodon_fatalis_Sergiodlarosa.jpg/640px-Smilodon_fatalis_Sergiodlarosa.jpg'
-            },
-            {
-                id: 'ammonite',
-                name: '암모나이트 (Ammonite)',
-                quote: '"제 껍데기의 수평선 패턴을 가만히 보고 있으면 마음이 편안해집니다."',
-                era: '중생대 (데본기~백악기 말)',
-                height: '직경 5cm ~ 2m 이상',
-                weight: '종에 따라 수백g ~ 수십kg',
-                trait: '나선형으로 감긴 단단한 평면 껍데기',
-                reason: '백악기 말 소행성 충돌로 인한 K-Pg 대멸종',
-                img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Ammonite_Fossil.jpg/640px-Ammonite_Fossil.jpg'
+                id: 'coelacanth',
+                type: '🐟 고생대~현대 어류',
+                name: '실러캔스 (Coelacanth)',
+                quote: '"6,600만 년 동안 멸종된 척하는 것도 꽤 고역이었습니다만."',
+                era: '고생대 데본기 ~ 현재 (살아있는 화석)',
+                size: '몸길이 약 1.5m ~ 2m / 체중 약 80kg',
+                trait: '지느러미에 뼈와 근육이 발달한 총지어류(Lobe-finned fish)로, 육상 척추동물(양서류)의 조상과 매우 가깝습니다.',
+                detail: '중생대 백악기 말 공룡과 함께 전멸한 것으로 알려졌으나, 1938년 남아프리카 남아프리카 공화국 해안에서 실물이 발견되어 전 세계 과학계를 충격에 빠뜨렸습니다.',
+                reason: '얕은 바다 종들은 멸종했으나, 심해 깊은 곳에 적응한 일부 개체군이 현재까지 살아남아 있습니다.',
+                img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Latimeria_chalumnae01.jpg/640px-Latimeria_chalumnae01.jpg'
             }
         ];
 
-        // 선택지에 따른 위트 있는 시스템 멘트
+        // 선택지별 멘트
         const choiceResponses = {
-            office: ['대범하군요.', '이건 범죄 아닌가요?', '사무실 서랍 속에 멸종을 숨기셨습니다.'],
-            return: ['그게 쉽나요?', '행운이군요.', '누군가는 이 결정을 아쉬워할 것입니다.']
+            office: ['대범하군요.', '이건 범죄 아닌가요?', '사무실 비밀 서랍 속에 역사 하나를 은닉했습니다.'],
+            return: ['그게 쉽나요?', '행운이군요.', '누군가는 이 결정을 깊이 아쉬워할 것입니다.']
         };
 
-        // 데이터 저장소 (로컬 스토리지)
+        // 게임 상태 저장
         let gameState = JSON.parse(localStorage.getItem('museum_game_state')) || {
             lastDate: '',
             todayCreature: null,
@@ -324,7 +483,7 @@
             officeList: []
         };
 
-        // 음향 설정
+        // BGM 설정
         document.getElementById('audio-file').addEventListener('change', function(e) {
             const file = e.target.files[0];
             if (file) {
@@ -334,23 +493,19 @@
             }
         });
 
-        // 초기화
         window.onload = function() {
             checkDailyVisit();
             renderMuseum();
             renderOffice();
         };
 
-        // 날짜 체크 및 일일 생물 등장 로직
         function checkDailyVisit() {
             const today = new Date().toISOString().slice(0, 10);
 
-            // 오늘 이미 방문했거나 결정을 내렸다면 팝업을 띄우지 않음
             if (gameState.lastDate === today && !gameState.todayCreature) {
                 return;
             }
 
-            // 새로운 날이 오면 새로운 생물 선정
             if (gameState.lastDate !== today) {
                 const randomIndex = Math.floor(Math.random() * creatureDB.length);
                 gameState.todayCreature = creatureDB[randomIndex];
@@ -358,48 +513,47 @@
                 saveState();
             }
 
-            // 오늘 아직 선택을 안 했다면 팝업 표시
             if (gameState.todayCreature) {
                 showPopup(gameState.todayCreature);
             }
         }
 
-        // 팝업 띄우기
         function showPopup(creature) {
             const randomHeader = headerTitles[Math.floor(Math.random() * headerTitles.length)];
+            const todayStr = new Date().toLocaleDateString('ko-KR', { year: 'numeric', month: 'long', day: 'numeric' });
             
+            document.getElementById('pop-date').innerText = `[ ${todayStr} 의 발견 ]`;
             document.getElementById('pop-header').innerText = randomHeader;
             document.getElementById('pop-quote').innerText = creature.quote;
             document.getElementById('pop-img').src = creature.img;
             
             document.getElementById('pop-info').innerHTML = `
-                <strong>📜 Name:</strong> ${creature.name}<br>
-                <strong>⏳ Era:</strong> ${creature.era}<br>
-                <strong>📏 Size:</strong> 키 ${creature.height} / 무게 ${creature.weight}<br>
-                <strong>💡 Trait:</strong> ${creature.trait}<br>
-                <strong>☠️ Extinction:</strong> ${creature.reason}
+                <div class="info-row"><span class="info-label">🏷️ 학명/명칭:</span> ${creature.name} (${creature.type})</div>
+                <div class="info-row"><span class="info-label">⏳ 생존 연대:</span> ${creature.era}</div>
+                <div class="info-row"><span class="info-label">📏 신체 규모:</span> ${creature.size}</div>
+                <div class="info-row"><span class="info-label">🧬 생물학적 특징:</span> ${creature.trait}</div>
+                <div class="info-row"><span class="info-label">📖 고생물학적 가치:</span> ${creature.detail}</div>
+                <div class="info-row" style="margin-bottom:0;"><span class="info-label" style="color:#e28181;">☠️ 멸종 원인:</span> ${creature.reason}</div>
             `;
 
             document.getElementById('daily-modal').classList.remove('hidden');
         }
 
-        // 선택 처리
         function makeChoice(action) {
             const creature = gameState.todayCreature;
 
             if (action === 'museum') {
                 gameState.museumList.push(creature);
-                alert(`[${creature.name}]이(가) 박물관에 안전하게 전시되었습니다.`);
+                alert(`[${creature.name}]이(가) 중앙 박물관 진열대에 안전하게 배치되었습니다.`);
             } else if (action === 'office') {
                 gameState.officeList.push(creature);
                 const msg = choiceResponses.office[Math.floor(Math.random() * choiceResponses.office.length)];
-                alert(`"${msg}"\n\n[${creature.name}]을(를) 개인 사무실에 은밀히 숨겼습니다.`);
+                alert(`"${msg}"\n\n[${creature.name}]을(를) 개인 사무실 캐비넷에 은밀히 보관했습니다.`);
             } else if (action === 'return') {
                 const msg = choiceResponses.return[Math.floor(Math.random() * choiceResponses.return.length)];
-                alert(`"${msg}"\n\n[${creature.name}]을(를) 다른 박물관으로 돌려보냈습니다.`);
+                alert(`"${msg}"\n\n[${creature.name}]을(를) 타 인근 연구기관으로 돌려보냈습니다.`);
             }
 
-            // 오늘 할 일 완료 처리
             gameState.todayCreature = null;
             saveState();
 
@@ -408,7 +562,6 @@
             renderOffice();
         }
 
-        // 화면 탭 전환
         function switchTab(tab) {
             document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
             document.getElementById('museum-view').classList.add('hidden');
@@ -423,49 +576,51 @@
             }
         }
 
-        // 박물관 렌더링
         function renderMuseum() {
             const grid = document.getElementById('museum-grid');
             grid.innerHTML = '';
 
             if (gameState.museumList.length === 0) {
-                grid.innerHTML = '<div style="color:#777; grid-column: 1/-1;">아직 전시된 생물이 없습니다. 매일 찾아오는 생물을 기다려보세요.</div>';
+                grid.innerHTML = '<div style="color:#a39284; grid-column: 1/-1; text-align:center; padding: 40px;">전시관이 아직 비어있습니다. 매일 문을 두드리는 생물을 맞이해 보세요.</div>';
                 return;
             }
 
             gameState.museumList.forEach(item => {
                 grid.innerHTML += `
-                    <div class="exhibit-slot filled">
-                        <img class="slot-img" src="${item.img}" alt="${item.name}">
-                        <strong style="color:var(--accent-color); font-size:0.9rem;">${item.name}</strong>
-                        <p style="font-size:0.75rem; color:#aaa; margin-top:5px;">${item.era}</p>
+                    <div class="museum-stand">
+                        <img class="stand-img" src="${item.img}" alt="${item.name}">
+                        <div class="stand-caption">
+                            <div class="stand-title">${item.name}</div>
+                            <div class="stand-subtitle">${item.type}</div>
+                            <div class="plaque">${item.era}</div>
+                        </div>
                     </div>
                 `;
             });
         }
 
-        // 개인 사무실 렌더링
         function renderOffice() {
             const grid = document.getElementById('office-grid');
             grid.innerHTML = '';
 
             if (gameState.officeList.length === 0) {
-                grid.innerHTML = '<div style="color:#777; grid-column: 1/-1;">사무실은 아직 비어있습니다.</div>';
+                grid.innerHTML = '<div style="color:#8c7a6b; grid-column: 1/-1; text-align:center; padding: 40px;">사무실에 아직 숨겨둔 개인 소장품이 없습니다.</div>';
                 return;
             }
 
             gameState.officeList.forEach(item => {
                 grid.innerHTML += `
-                    <div class="exhibit-slot filled" style="border-color: #8c4343;">
-                        <img class="slot-img" src="${item.img}" alt="${item.name}">
-                        <strong style="color:#e28181; font-size:0.9rem;">${item.name}</strong>
-                        <p style="font-size:0.75rem; color:#aaa; margin-top:5px;">🔒 비공개 소장품</p>
+                    <div class="office-frame">
+                        <img class="stand-img" src="${item.img}" alt="${item.name}">
+                        <div class="stand-caption">
+                            <div class="stand-title" style="color:#e28181;">${item.name}</div>
+                            <div class="stand-subtitle" style="color:#b59b9b;">🔒 비공개 개인 수집품</div>
+                        </div>
                     </div>
                 `;
             });
         }
 
-        // 상태 저장
         function saveState() {
             localStorage.setItem('museum_game_state', JSON.stringify(gameState));
         }
