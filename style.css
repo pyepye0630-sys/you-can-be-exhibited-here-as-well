@@ -1,0 +1,86 @@
+/* 우측 상단 고정 업적 버튼 */
+#achievement-btn {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: #1a1714;
+  color: #d4af37;
+  border: 1px solid #d4af37;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 1000;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+  transition: all 0.3s ease;
+}
+
+#achievement-btn:hover {
+  background: #2a241e;
+  box-shadow: 0 0 12px rgba(212, 175, 55, 0.4);
+}
+
+/* 업적 토스트 알림 배너 */
+.achievement-toast {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  background: rgba(18, 16, 12, 0.95);
+  border: 1px solid #d4af37;
+  box-shadow: 0 4px 20px rgba(212, 175, 55, 0.25);
+  padding: 15px 20px;
+  border-radius: 8px;
+  color: #f0e6d2;
+  z-index: 9999;
+  animation: slideUp 0.4s ease-out;
+}
+
+.achievement-msg {
+  color: #d4af37;
+  font-style: italic;
+  margin: 4px 0;
+}
+
+.achievement-cond {
+  font-size: 0.85em;
+  color: #a09580;
+}
+
+/* 업적 도록 카드 (해금 vs 잠금) */
+.achievement-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  margin-bottom: 10px;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+
+.achievement-card.unlocked {
+  background: rgba(35, 30, 22, 0.9);
+  border: 1px solid #d4af37;
+  color: #f0e6d2;
+}
+
+.achievement-card.locked {
+  background: rgba(20, 20, 20, 0.6);
+  border: 1px solid #444444;
+  color: #777777;
+  filter: grayscale(100%);
+  opacity: 0.6;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(100%); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.achievement-toast.fade-out {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
