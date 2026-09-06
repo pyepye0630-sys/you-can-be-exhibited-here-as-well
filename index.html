@@ -558,5 +558,21 @@
             }
         });
     </script>
+    <!-- 우측 상단 업적 버튼 -->
+  <button id="achievement-btn" onclick="openAchievementModal()">🏆 업적</button>
+
+  <!-- 업적 모아보기 모달 창 -->
+  <div id="achievement-modal" class="modal hidden">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>전시관 업적 목록</h2>
+        <button onclick="closeAchievementModal()">✕</button>
+      </div>
+      <div id="achievement-list" class="achievement-grid">
+        <!-- JS가 이곳에 업적 카드를 생성합니다 -->
+      </div>
+    </div>
+  </div>
+    
 </body>
 </html>
